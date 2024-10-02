@@ -111,6 +111,10 @@ func buildAuthGroup() *auth_service.Group {
 		group.Add(&auth_service.SSPI{}) // it MUST be the last, see the comment of SSPI
 	}
 
+	if setting.BKAuthClient.BKAuthEnabled {
+		group.Add(&auth_service.BKSession{})
+	}
+
 	return group
 }
 
