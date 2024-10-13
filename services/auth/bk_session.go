@@ -88,5 +88,9 @@ func getUsername(BKToken string) (string, error) {
 		return "", errors.New(result.Message)
 	}
 	username := result.Data.(map[string]interface{})["username"].(string)
+	// 由于admin在giteam为保留用户，这里将蓝鲸的admin用户映射为root用户
+	if username == "admin" {
+		username = "root"
+	}
 	return username, nil
 }
